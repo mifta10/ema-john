@@ -33,6 +33,7 @@ const Cart = (props) => {
         <p><small>Total Before Tax: ${formatNumber(tb)}</small></p>
         <p><small>Tax: ${formatNumber(tax)}</small></p>
         <h4 className="order-total">Order Total: ${formatNumber(grandTotal)}</h4>
+        <button className="main-btn">Review Your Order</button>
     </div>
   );
 };
