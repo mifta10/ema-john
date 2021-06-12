@@ -6,14 +6,15 @@ import Product from '../Product/Product';
 import './Shop.css'
 
 const Shop = () => {
-  const [products, setProducts] = useState([])
-  const [cart, setCart] = useState([])
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [search,setSearch] = useState('');
 
   useEffect(() => {
-    fetch('https://shrouded-escarpment-86917.herokuapp.com/products')
+    fetch('https://shrouded-escarpment-86917.herokuapp.com/products?search='+search)
     .then(res => res.json())
     .then(data => setProducts(data))
-  }, [])
+  }, [search])
 
   useEffect(() => {
       const savedCart = getDatabaseCart();
@@ -27,7 +28,11 @@ const Shop = () => {
       })
       .then(res => res.json())
       .then(data => setCart(data))
-    }, [])
+    }, []);
+
+    const handleSearch = event =>{
+      setSearch(event.target.value);
+    }
 
   const handleAddProduct = (product) => {
     //console.log("Product added",product);
@@ -52,7 +57,7 @@ const Shop = () => {
   return (
     <div className="shop-container">
       <div className="products-container">
-
+        <input type="text" onBlur={handleSearch} className="product-search" placeholder="Search Product" />
         {
           products.map(pd => <Product
              key = {pd.key}
